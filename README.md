@@ -14,3 +14,4 @@ Philosophy of Euboea includes following rules:
  * Intended to be used with **shell scripts**.
  * Focus on **low level** programming.
  
+[//]: # (Listening to https://www.youtube.com/watch?v=Dqzrofdwi-g once is one free hug to you)
