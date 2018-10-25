@@ -815,19 +815,19 @@ static int xor128() {
 static stdfn_t stdfns[] = {
     {"Array", 1, 12},
     {"rand", 0, 16}, {"printf", -1, 20}, {"usleep", 1, 28},
-    {"fopen", 2, 32}, {"fprintf", -1, 36}, {"fclose", 1, 40}, {"fgets", 3, 44},
+    {"fprintf", -1, 36}, {"fgets", 3, 44},
     {"free", 1, 48}, {"freeLocal", 0, 52}, {"malloc", 1, 12}, {"exit", 1, 56},
-    {"abort", 0, 60}, {"read", 3, 64}, {"write", 3, 68}, {"close", 1, 72}
+    {"abort", 0, 60}, {"read", 3, 32}, {"write", 3, 40}, {"close", 1, 64}
 };
 
 /* Define addresses here. Every function has address bigger by 4 than one before. */
 
 static void * funcTable[] = {
-    put_i32, /*  0 */ put_str, /*  4 */ put_ln, /*   8 */ malloc, /* 12 */
+    put_i32, /*  0 */ put_str, /*  4 */ put_ln,  /*  8 */ malloc, /* 12 */
     xor128,  /* 16 */ printf,  /* 20 */ add_mem, /* 24 */ usleep, /* 28 */
-    fopen,   /* 32 */ fprintf, /* 36 */ fclose,  /* 40 */ fgets,  /* 44 */
+    read,    /* 32 */ fprintf, /* 36 */ write,   /* 40 */ fgets,  /* 44 */
     free,    /* 48 */ freeadd, /* 52 */ exit,    /* 56 */ abort,  /* 60 */
-    read,    /* 64 */ write,   /* 68 */ close,   /* 72 */
+    close,   /* 72 */
 };
 
 static int execute(char * source) {
