@@ -17,6 +17,7 @@ addons:
             - gcc-8
             - lcov
             - libc-ares-dev
+            - libc6-dev-i386
 
 matrix:
     include:
