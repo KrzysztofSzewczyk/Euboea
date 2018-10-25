@@ -1,0 +1,35 @@
+language: c
+sudo: required
+
+env:
+    global:
+        - LD_LIBRARY_PATH=/usr/local/lib
+
+addons:
+    apt:
+        config:
+            retries: true
+        sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-6.0
+        packages:
+            - gcc-7
+            - gcc-8
+            - lcov
+            - libc-ares-dev
+
+matrix:
+    include:
+        - os: osx
+          compiler: gcc
+          env:
+        - os: linux
+          compiler: gcc
+          dist: trusty
+          env:
+
+script:
+    - make
+
+notifications:
+email: false
