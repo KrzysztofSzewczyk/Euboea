@@ -6,6 +6,6 @@ matrix:
       script:
         - make
       
-    - language:
+    - language: c
       script:
         - make test
