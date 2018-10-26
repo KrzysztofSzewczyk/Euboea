@@ -7,3 +7,8 @@ euboea: euboea.o
 
 euboea.o: euboea.c
 	$(C) -o $@ -c euboea.c
+
+test: euboea
+	chmod 777 test
+	./test
+	exit $(.SHELLSTATUS)
