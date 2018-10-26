@@ -1,4 +1,11 @@
-language: c
-sudo: false
-script:
-  - make
+
+matrix:
+  fast_finish: true
+  include:
+    - language: c
+      script:
+        - make
+      
+    - language:
+      script:
+        - make test
