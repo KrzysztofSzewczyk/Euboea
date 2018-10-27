@@ -8,15 +8,14 @@ euboea: lexer.o euboea.o codegen.o
 minilua: dasm/minilua.c
 	$(CC) -Wall -std=c89 -O3 -o $@ $< -lm
 
-euboea.o: euboea.c euboea.h
-	$(C) -o $@ -c euboea.c
+euboea.o: euboea.c
+	$(C) -o $@ -c $^
 
 lexer.o: lexer.c
-	$(C) -o $@ -c lexer.c
+	$(C) -o $@ -c $^
 
-codegen.o: codegen.das minilua
-	cat codegen.das | ./minilua dasm/dynasm.lua --ccomment -o codegen.c -
-	$(C) -o $@ -c codegen.c
+codegen.o: codegen.c
+	$(C) -o $@ -c $^
 
 clean:
 	$(RM) a.out euboea minilua *.o *~ text codegen.c codegen.o lexer.o euboea.o
