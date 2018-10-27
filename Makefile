@@ -8,3 +8,8 @@ euboea.o: euboea.c
 	$(C) -o $@ -c $^
 clean:
 	$(RM) a.out euboea *.o *~ text euboea.o
+test: euboea
+	chmod 777 test
+	./test
+	exit $(.SHELLSTATUS)
+
