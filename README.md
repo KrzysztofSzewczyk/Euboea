@@ -19,5 +19,10 @@ Philosophy of Euboea includes following rules:
  * Focus on targeting **UNIX-like** operating system.
  * Intended to be used with **shell scripts**.
  * Focus on **low level** programming.
- 
+
+## Speed
+
+You can check speed of Euboea yourself, or check out speed using premade microbenchmark in benchmarks directory.
+On my PC, Euboea can be up to **4 times faster than Lua**
+
 [//]: # (Listening to https://www.youtube.com/watch?v=Dqzrofdwi-g once is one free hug to you)
