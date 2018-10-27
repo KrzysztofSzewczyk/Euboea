@@ -15,7 +15,7 @@ lexer.o: lexer.c
 	$(C) -o $@ -c lexer.c
 
 codegen.o: codegen.das minilua
-	cat codegen.das | ./minilua dasm/dynasm.lua -o codegen.c -
+	cat codegen.das | ./minilua dasm/dynasm.lua --ccomment -o codegen.c -
 	$(C) -o $@ -c codegen.c
 
 clean:
