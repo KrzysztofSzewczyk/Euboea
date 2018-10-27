@@ -1,11 +1,14 @@
 
 matrix:
   fast_finish: true
+  sudo: true
   include:
     - language: c
       script:
+        - sudo apt-get install gcc-multilib
         - make
       
     - language: c
       script:
+        - sudo apt-get install gcc-multilib
         - make test
