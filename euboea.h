@@ -32,7 +32,7 @@ typedef struct {
 } token_t;
 
 struct {
-    token_t *tok;
+    token_t *tok_t;
     int size, pos;
 } tok_t;
 
