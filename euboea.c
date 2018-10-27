@@ -114,13 +114,12 @@ static int32_t isindex() {
 
 static void primaryexp() {
     if (isdigit(tok_t.tok_t[tok_t.pos].val[0])) {
-        emit(0xb8 + EAX); emit32(atoi(tok_t.tok_t[tok_t.pos++].val));
+        emit(0xb8 + EAX); emit32(atoi(tok_t.tok_t[tok_t.pos++].val)); /* mov eax, %d */
     } else if (skip("'")) {
-        emit(0xb8 + EAX);
-        emit32(tok_t.tok_t[tok_t.pos++].val[0]);
+        emit(0xb8 + EAX); emit32(tok_t.tok_t[tok_t.pos++].val[0]); /* mov eax, %d */
         skip("'");
     } else if (skip("\"")) {
-        emit(0xb8); getstr(); emit32(0x00);
+        emit(0xb8); getstr(); emit32(0x00); /* mov eax, string_adress */
     } else if (isalpha(tok_t.tok_t[tok_t.pos].val[0])) {
         char * name = tok_t.tok_t[tok_t.pos].val;
         var_t * v;
@@ -131,17 +130,16 @@ static void primaryexp() {
                 if ((v = getvar(name)) == NULL)
                     error("%d: '%s' was not declared", tok_t.tok_t[tok_t.pos].nline, name);
                 asmexpr();
-                emit(0x89); emit(0xc0 + EAX * 8 + ECX);
+                emit(0x89); emit(0xc0 + EAX * 8 + ECX); /* mov ecx, eax */
                 if (v->loctype == V_LOCAL) {
-                    emit(0x8b); emit(0x55);
-                    emit(256 - sizeof(int32_t) * v->id);
+                    emit(0x8b); emit(0x55); emit(256 - sizeof(int32_t) * v->id); /* mov edx, [ebp - v * 4] */
                 } else if (v->loctype == V_GLOBAL) {
-                    emit(0x8b); emit(0x15); emit32(v->id);
+                    emit(0x8b); emit(0x15); emit32(v->id); /* mov edx, global_address */
                 }
                 if (v->type == T_INT) {
-                    emit(0x8b); emit(0x04); emit(0x8a);
+                    emit(0x8b); emit(0x04); emit(0x8a); /* mov eax, [edx + ecs * 4] */
                 } else {
-                    emit(0x0f); emit(0xb6); emit(0x04); emit(0x0a);
+                    emit(0x0f); emit(0xb6); emit(0x04); emit(0x0a); /* movzx eax, [edx + ecx] */
                 }
                 if (!skip("]"))
                     error("%d: expected expression ']'", tok_t.tok_t[tok_t.pos].nline);
@@ -154,12 +152,12 @@ static void primaryexp() {
                         !strcmp(val, "\"") || !strcmp(val, "(")) {
                         for (; i < function->args; i++) {
                             asmexpr();
-                            emit(0x50 + EAX);
+                            emit(0x50 + EAX); /* push eax */
                             skip(",");
                         }
                     }
-                    emit(0xe8); emit32(0xFFFFFFFF - (ntvCount - function->address) - 3);
-                    emit(0x81); emit(0xc0 + ESP);
+                    emit(0xe8); emit32(0xFFFFFFFF - (ntvCount - function->address) - 3); /* function call */
+                    emit(0x81); emit(0xc0 + ESP); /* add esp, %d */
                     emit32(function->args * sizeof(int32_t));
                 }
                 if (!skip(")"))
@@ -168,9 +166,9 @@ static void primaryexp() {
                 if ((v = getvar(name)) == NULL)
                     error("var: %d: '%s' was not declared", tok_t.tok_t[tok_t.pos].nline, name);
                 if (v->loctype == V_LOCAL) {
-                    emit(0x8b); emit(0x45); emit(256 - sizeof(int32_t) * v->id);
+                    emit(0x8b); emit(0x45); emit(256 - sizeof(int32_t) * v->id); /* mov eax, variable */
                 } else if (v->loctype == V_GLOBAL) {
-                    emit(0xa1); emit32(v->id);
+                    emit(0xa1); emit32(v->id); /* mov eax, global_address */
                 }
             }
         }
@@ -180,11 +178,11 @@ static void primaryexp() {
         if (!skip(")")) error("%d: expected expression ')'", tok_t.tok_t[tok_t.pos].nline);
     }
     while (isindex()) {
-        emit(0x89); emit(0xc0 + EAX * 8 + ECX);
+        emit(0x89); emit(0xc0 + EAX * 8 + ECX); /* mov ecx, eax */
         skip("[");
         asmexpr();
         skip("]");
-        emit(0x8b); emit(0x04); emit(0x81);
+        emit(0x8b); emit(0x04); emit(0x81); /* mov eax, [eax * 4 + ecx] */
     }
 }
 
@@ -192,19 +190,19 @@ static void binexp() {
     int32_t mul = 0, div = 0;
     primaryexp();
     while ((mul = skip("*")) || (div = skip("/")) || skip("%")) {
-        emit(0x50 + EAX);
+        emit(0x50 + EAX); /* push eax */
         primaryexp();
-        emit(0x89); emit(0xc0 + EAX * 8 + EBX);
-        emit(0x58 + EAX);
+        emit(0x89); emit(0xc0 + EAX * 8 + EBX); /* mov ebx, eax */
+        emit(0x58 + EAX); /* pop eax */
         if (mul) {
-            emit(0xf7); emit(0xe8 + EBX);
+            emit(0xf7); emit(0xe8 + EBX); /* mul ebx */
         } else if (div) {
-            emit(0xb8 + EDX); emit32(0);
-            emit(0xf7); emit(0xf8 + EBX);
+            emit(0xb8 + EDX); emit32(0); /* mov ebx, 0 */
+            emit(0xf7); emit(0xf8 + EBX); /* div ebx */
         } else {
-            emit(0xb8 + EDX); emit32(0);
-            emit(0xf7); emit(0xf8 + EBX);
-            emit(0x89); emit(0xc0 + EDX * 8 + EAX);
+            emit(0xb8 + EDX); emit32(0); /* mov ebx, 0 */
+            emit(0xf7); emit(0xf8 + EBX); /* div ebx */
+            emit(0x89); emit(0xc0 + EDX * 8 + EAX); /* mov eax, edx */
         }
     }
 }
@@ -213,14 +211,14 @@ static void algexp() {
     int32_t add;
     binexp();
     while ((add = skip("+")) || skip("-")) {
-        emit(0x50 + EAX);
+        emit(0x50 + EAX); /* push eax */
         binexp();
-        emit(0x89); emit(0xc0 + EAX * 8 + EBX);
-        emit(0x58 + EAX);
+        emit(0x89); emit(0xc0 + EAX * 8 + EBX); /* mov ebx, eax */
+        emit(0x58 + EAX); /* pop eax */
         if (add) {
-            emit(0x03); emit(EAX * 8 + 0xc0 + EBX);
+            emit(0x03); emit(EAX * 8 + 0xc0 + EBX); /* add eax, ebx */
         } else {
-            emit(0x2b); emit(EAX * 8 + 0xc0 + EBX);
+            emit(0x2b); emit(EAX * 8 + 0xc0 + EBX); /* sub eax, ebx */
         }
     }
 }
@@ -229,11 +227,11 @@ static void conexp() {
     int32_t lt = 0, gt = 0, ne = 0, eql = 0, fle = 0;
     algexp();
     if ((lt = skip("<")) || (gt = skip(">")) || (ne = skip("!=")) || (eql = skip("==")) || (fle = skip("<=")) || skip(">=")) {
-        emit(0x50 + EAX);
+        emit(0x50 + EAX); /* push eax */
         algexp();
-        emit(0x89); emit(0xc0 + EAX * 8 + EBX);
-        emit(0x58 + EAX);
-        emit(0x39); emit(0xd8);
+        emit(0x89); emit(0xc0 + EAX * 8 + EBX); /* mov ebx, eax */
+        emit(0x58 + EAX); /* pop eax */
+        emit(0x39); emit(0xd8); /* cmp eax, ebx */
         emit(0x0f);
         emit(lt ? 0x9c:
              gt ? 0x9f:
@@ -241,8 +239,8 @@ static void conexp() {
              eql ? 0x94:
              fle ? 0x9e:
              0x9d);
-        emit(0xc0);
-        emit(0x0f); emit(0xb6); emit(0xc0);
+        emit(0xc0); /* setX al */
+        emit(0x0f); emit(0xb6); emit(0xc0); /* movzx eax, al */
     }
 }
 
@@ -251,11 +249,11 @@ void asmexpr() {
     conexp();
     while ((and = skip("and") || skip("&")) ||
            (or = skip("or") || skip("|")) || (skip("xor") || skip("^"))) {
-        emit(0x50 + EAX);
+        emit(0x50 + EAX); /* push eax */
         conexp();
-        emit(0x89); emit(0xc0 + EAX * 8 + EBX);
-        emit(0x58 + EAX);
-        emit(and ? 0x21 : or ? 0x09 : 0x31); emit(0xd8);
+        emit(0x89); emit(0xc0 + EAX * 8 + EBX); /* mov ebx, eax */
+        emit(0x58 + EAX); /* pop eax */
+        emit(and ? 0x21 : or ? 0x09 : 0x31); emit(0xd8); /* and eax, ebx */
     }
 }
 
@@ -315,7 +313,7 @@ static func_t * appfn(char * name, int address, int args) {
 }
 
 static int32_t appbrk() {
-    emit(0xe9);
+    emit(0xe9); /* jmp */
     brks_t.addr = realloc(brks_t.addr, 4 * (brks_t.count + 1));
     brks_t.addr[brks_t.count] = ntvCount;
     emit32(0);
@@ -324,7 +322,7 @@ static int32_t appbrk() {
 
 static int32_t appret() {
     asmexpr();
-    emit(0xe9);
+    emit(0xe9); /* jmp */
     rets_t.addr = realloc(rets_t.addr, 4 * (rets_t.count + 1));
     if (rets_t.addr == NULL) error("no enough memory");
     rets_t.addr[rets_t.count] = ntvCount;
@@ -385,9 +383,9 @@ static var_t * declvar() {
 static int condstmt() {
     uint32_t end;
     asmexpr();
-    emit(0x83); emit(0xf8); emit(0x00);
-    emit(0x75); emit(0x05);
-    emit(0xe9); end = ntvCount; emit32(0);
+    emit(0x83); emit(0xf8); emit(0x00); /* cmp eax, 0 */
+    emit(0x75); emit(0x05); /* jne 5 */
+    emit(0xe9); end = ntvCount; emit32(0); /* jmp */
     return eval(end, 0);
 }
 
@@ -399,9 +397,9 @@ static int loopstmt() {
         stepBgn[0] = tok_t.pos;
         for (; tok_t.tok_t[tok_t.pos].val[0] != ';'; tok_t.pos++);
     }
-    emit(0x83); emit(0xf8); emit(0x00);
-    emit(0x75); emit(0x05);
-    emit(0xe9); end = ntvCount; emit32(0);
+    emit(0x83); emit(0xf8); emit(0x00); /* cmp eax, 0 */
+    emit(0x75); emit(0x05); /* jne 5 */
+    emit(0xe9); end = ntvCount; emit32(0); /* jmp while end */
     if (skip(":")) expression(0, BLOCK_LOOP);
     else eval(0, BLOCK_LOOP);
     if (stepOn) {
@@ -411,7 +409,7 @@ static int loopstmt() {
         tok_t.pos = stepBgn[1];
     }
     uint32_t n = 0xFFFFFFFF - ntvCount + loopBgn - 4;
-    emit(0xe9); emit32(n);
+    emit(0xe9); emit32(n); /* jmp n */
     emit32ins(ntvCount - end - 4, end);
     for (--brks_t.count; brks_t.count >= 0; brks_t.count--)
         emit32ins(ntvCount - brks_t.addr[brks_t.count] - 4, brks_t.addr[brks_t.count]);
@@ -433,10 +431,10 @@ static int32_t fnstmt() {
             error("%d: expecting ')'", tok_t.tok_t[tok_t.pos].nline);
     }
     appfn(funcName, ntvCount, argsc);
-    emit(0x50 + EBP);
-    emit(0x89); emit(0xc0 + ESP * 8 + EBP);
+    emit(0x50 + EBP); /* push ebp */
+    emit(0x89); emit(0xc0 + ESP * 8 + EBP); /* mov ebp, esp */
     espBgn = ntvCount + 2;
-    emit(0x81); emit(0xe8 + ESP); emit32(0);
+    emit(0x81); emit(0xe8 + ESP); emit32(0); /* sub esp, 0 */
     int32_t argpos[128], i;
     for (i = 0; i < argsc; i++) {
         emit(0x8b); emit(0x45); emit(0x08 + (argsc - i - 1) * sizeof(int32_t));
@@ -449,9 +447,9 @@ static int32_t fnstmt() {
     }
     rets_t.count = 0;
     emit(0x81); emit(0xc0 + ESP);
-    emit32(sizeof(int32_t) * (varSize[nowFunc] + 6));
-    emit(0xc9);
-    emit(0xc3);
+    emit32(sizeof(int32_t) * (varSize[nowFunc] + 6)); /* add esp, n */
+    emit(0xc9); /* leave */
+    emit(0xc3); /* ret */
     emit32ins(sizeof(int32_t) * (varSize[nowFunc] + 6), espBgn);
     for (i = 1; i <= argsc; i++)
         ntvCode[argpos[i - 1]] = 256 - sizeof(int32_t) * i + (((varSize[nowFunc] + 6) * sizeof(int32_t)) - 4);
@@ -472,16 +470,16 @@ int expression(int pos, int status) {
         fn_t.inside = IN_FUNC;
         nowFunc++;
         appfn("main", ntvCount, 0);
-        emit(0x50 + EBP);
-        emit(0x89); emit(0xc0 + ESP * 8 + EBP);
+        emit(0x50 + EBP); /* push ebp */
+        emit(0x89); emit(0xc0 + ESP * 8 + EBP); /* mov ebp, esp */
         uint32_t espBgn = ntvCount + 2;
-        emit(0x81); emit(0xe8 + ESP); emit32(0);
-        emit(0x8b); emit(0x75); emit(0x0c);
+        emit(0x81); emit(0xe8 + ESP); emit32(0); /* sub esp, 0 */
+        emit(0x8b); emit(0x75); emit(0x0c); /* mov esi, 0xC(ebp) */
         eval(0, 0);
         emit(0x81); emit(0xc4);
-        emit32(sizeof(int32_t) * (varSize[nowFunc] + 6));
-        emit(0xc9);
-        emit(0xc3);
+        emit32(sizeof(int32_t) * (varSize[nowFunc] + 6)); /* add esp, n */
+        emit(0xc9); /* leave */
+        emit(0xc3); /* ret */
         emit32ins(sizeof(int32_t) * (varSize[nowFunc] + 6), espBgn);
         fn_t.inside = IN_GLOBAL;
     } else if (isassign())
@@ -490,35 +488,35 @@ int expression(int pos, int status) {
         do {
             int isstring = 0;
             if (skip("\"")) {
-                emit(0xb8); getstr(); emit32(0x00);
+                emit(0xb8); getstr(); emit32(0x00); /* mov eax, string_address */
                 isstring = 1;
             } else
                 asmexpr();
-            emit(0x50 + EAX);
+            emit(0x50 + EAX); /* push eax */
             if (isstring) {
-                emit(0xff); emit(0x56); emit(4);
+                emit(0xff); emit(0x56); emit(4); /* call *0x4(esi), puts */
             } else {
-                emit(0xff); emit(0x16);
+                emit(0xff); emit(0x16); /* call (esi) putnumber */
             }
-            emit(0x81); emit(0xc0 + ESP); emit32(4);
+            emit(0x81); emit(0xc0 + ESP); emit32(4); /* add esp, 4 */
         } while (skip(","));
         if (isputs) {
-            emit(0xff); emit(0x56); emit(8);
+            emit(0xff); emit(0x56); emit(8); /* call 0x8(esi) putline */
         }
     } else if (skip("printf")) {
         if (skip("\"")) {
-            emit(0xb8); getstr(); emit32(0x00);
-            emit(0x89); emit(0x44); emit(0x24); emit(0x00);
+            emit(0xb8); getstr(); emit32(0x00); /* mov eax, string_address */
+            emit(0x89); emit(0x44); emit(0x24); emit(0x00); /* mov [esp+0], eax */
         }
         if (skip(",")) {
             uint32_t a = 4;
             do {
                 asmexpr();
-                emit(0x89); emit(0x44); emit(0x24); emit(a);
+                emit(0x89); emit(0x44); emit(0x24); emit(a); /* mov [esp+a], eax */
                 a += 4;
             } while (skip(","));
         }
-        emit(0xff); emit(0x56); emit(12 + 8);
+        emit(0xff); emit(0x56); emit(12 + 8); /* call printf */
     } else if (skip("for")) {
         assignment();
         if (!skip(","))
@@ -532,18 +530,18 @@ int expression(int pos, int status) {
         condstmt();
     else if (skip("else")) {
         int32_t end;
-        emit(0xe9); end = ntvCount; emit32(0);
+        emit(0xe9); end = ntvCount; emit32(0); /* jmp while end */
         emit32ins(ntvCount - pos - 4, pos);
         eval(end, 0);
         return 1;
     } else if (skip("elif")) {
         int32_t endif, end;
-        emit(0xe9); endif = ntvCount; emit32(0);
+        emit(0xe9); endif = ntvCount; emit32(0); /* jmp while end */
         emit32ins(ntvCount - pos - 4, pos);
         asmexpr();
-        emit(0x83); emit(0xf8); emit(0x00);
-        emit(0x75); emit(0x05);
-        emit(0xe9); end = ntvCount; emit32(0);
+        emit(0x83); emit(0xf8); emit(0x00); /* cmp eax, 0 */
+        emit(0x75); emit(0x05); /* jne 5 */
+        emit(0xe9); end = ntvCount; emit32(0); /* jmp while end */
         eval(end, 0);
         emit32ins(ntvCount - endif - 4, endif);
         return 1;
@@ -624,19 +622,19 @@ int32_t assignment() {
     if (v->loctype == V_LOCAL) {
         if (skip("[")) {
             asmexpr();
-            emit(0x50 + EAX);
+            emit(0x50 + EAX); /* push eax */
             if (skip("]") && skip("=")) {
                 asmexpr();
                 emit(0x8b); emit(0x4d);
                 emit(256 -
                      (v->type == T_INT ? sizeof(int32_t) :
                       v->type == T_STRING ? sizeof(int32_t *) :
-                      v->type == T_DOUBLE ? sizeof(double) : 4) * v->id);
-                emit(0x58 + EDX);
+                      v->type == T_DOUBLE ? sizeof(double) : 4) * v->id); /* mov ecx, [ebp - n] */
+                emit(0x58 + EDX); /* pop edx */
                 if (v->type == T_INT) {
-                    emit(0x89); emit(0x04); emit(0x91);
+                    emit(0x89); emit(0x04); emit(0x91); /* mov [ecx + edx * 4], eax */
                 } else {
-                    emit(0x89); emit(0x04); emit(0x11);
+                    emit(0x89); emit(0x04); emit(0x11); /* mov [ecx + edx], eax */
                 }
             } else if ((inc = skip("++")) || (dec = skip("--"))) {
             } else
@@ -650,17 +648,17 @@ int32_t assignment() {
                 emit(256 -
                      (v->type == T_INT ? sizeof(int32_t) :
                       v->type == T_STRING ? sizeof(int32_t *) :
-                      v->type == T_DOUBLE ? sizeof(double) : 4) * v->id);
-                emit(0x50 + EAX);
-                if (inc) emit(0x40);
-                else if (dec) emit(0x48);
+                      v->type == T_DOUBLE ? sizeof(double) : 4) * v->id); /* mov eax, variable */
+                emit(0x50 + EAX); /* push eax */
+                if (inc) emit(0x40); /* inc eax */
+                else if (dec) emit(0x48); /* dec eax */
             }
             emit(0x89); emit(0x45);
             emit(256 -
                  (v->type == T_INT ? sizeof(int32_t) :
                   v->type == T_STRING ? sizeof(int32_t *) :
-                  v->type == T_DOUBLE ? sizeof(double) : 4) * v->id);
-            if (inc || dec) emit(0x58 + EAX);
+                  v->type == T_DOUBLE ? sizeof(double) : 4) * v->id); /* mov var, eax */
+            if (inc || dec) emit(0x58 + EAX); /* pop eax */
         }
     } else if (v->loctype == V_GLOBAL) {
         if (declare) {
@@ -671,28 +669,28 @@ int32_t assignment() {
         } else {
             if (skip("[")) {
                 asmexpr();
-                emit(0x50 + EAX);
+                emit(0x50 + EAX); /* push eax */
                 if (skip("]") && skip("=")) {
                     asmexpr();
-                    emit(0x8b); emit(0x0d); emit32(v->id);
-                    emit(0x58 + EDX);
+                    emit(0x8b); emit(0x0d); emit32(v->id); /* mov ecx, global_address */
+                    emit(0x58 + EDX); /* pop edx */
                     if (v->type == T_INT) {
-                        emit(0x89); emit(0x04); emit(0x91);
+                        emit(0x89); emit(0x04); emit(0x91); /* mov [ecx+edx*4], eax */
                     } else {
-                        emit(0x89); emit(0x04); emit(0x11);
+                        emit(0x89); emit(0x04); emit(0x11); /* mov [ecx+edx], eax */
                     }
                 } else error("%d: invalid assignment", tok_t.tok_t[tok_t.pos].nline);
             } else if (skip("=")) {
                 asmexpr();
-                emit(0xa3); emit32(v->id);
+                emit(0xa3); emit32(v->id); /* mov global_address, eax */
             } else if ((inc = skip("++")) || (dec = skip("--"))) {
-                emit(0xa1); emit32(v->id);
-                emit(0x50 + EAX);
-                if (inc) emit(0x40);
-                else if (dec) emit(0x48);
-                emit(0xa3); emit32(v->id);
+                emit(0xa1); emit32(v->id); /* mov eax, global_address */
+                emit(0x50 + EAX); /* push eax */
+                if (inc) emit(0x40); /* inc eax */
+                else if (dec) emit(0x48); /* dec eax */
+                emit(0xa3); emit32(v->id); /* mov global_address, eax */
             }
-            if (inc || dec) emit(0x58 + EAX);
+            if (inc || dec) emit(0x58 + EAX); /* pop eax */
         }
     }
     return 0;
@@ -702,6 +700,7 @@ static void setxor() {
     w = 1234 + (getpid() ^ 0xFFBA9285);
 }
 
+/* TODO: W^X workaround for #3 */
 void init() {
     long memsz = 0xFFFF + 1;
     if (posix_memalign((void **) &ntvCode, memsz, memsz))
@@ -864,26 +863,26 @@ int makestd(char * name) {
         if (!strcmp(stdfns[i].name, name)) {
             if (!strcmp(name, "Array")) {
                 asmexpr();
-                emit(0xc1); emit(0xe0 + EAX); emit(2);
-                emit(0x89); emit(0x04); emit(0x24);
-                emit(0xff); emit(0x56); emit(12);
-                emit(0x50 + EAX);
-                emit(0x89); emit(0x04); emit(0x24);
-                emit(0xff); emit(0x56); emit(24);
-                emit(0x58 + EAX);
+                emit(0xc1); emit(0xe0 + EAX); emit(2); /* shl eax, 2 */
+                emit(0x89); emit(0x04); emit(0x24); /* mov [esp], eax */
+                emit(0xff); emit(0x56); emit(12); /* call malloc */
+                emit(0x50 + EAX); /* push eax */
+                emit(0x89); emit(0x04); emit(0x24); /* mov [esp], eax */
+                emit(0xff); emit(0x56); emit(24); /* call add_mem */
+                emit(0x58 + EAX); /* pop eax */
             } else {
                 if (stdfns[i].args == -1) {
                     uint32_t a = 0;
                     do {
                         asmexpr();
-                        emit(0x89); emit(0x44); emit(0x24); emit(a);
+                        emit(0x89); emit(0x44); emit(0x24); emit(a); /* mov [esp+a], eax */
                         a += 4;
                     } while (skip(","));
                 } else {
                     int arg = 0;
                     for (; arg < stdfns[i].args; arg++) {
                         asmexpr();
-                        emit(0x89); emit(0x44); emit(0x24); emit(arg * 4);
+                        emit(0x89); emit(0x44); emit(0x24); emit(arg * 4); /* mov [esp+arg*4], eax */
                         skip(",");
                     }
                 }
