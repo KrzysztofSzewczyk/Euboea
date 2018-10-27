@@ -25,4 +25,8 @@ Philosophy of Euboea includes following rules:
 You can check speed of Euboea yourself, or check out speed using premade microbenchmark in benchmarks directory.
 On my PC, Euboea can be up to **4 times faster than Lua**
 
+## Learning Euboea
+
+You can check out the wiki! ![Link](https://github.com/kspalaiologos/Euboea/wiki)
+
 [//]: # (Listening to https://www.youtube.com/watch?v=Dqzrofdwi-g once is one free hug to you)
