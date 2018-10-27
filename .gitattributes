@@ -1,1 +1,4 @@
 tests/* linguist-vendored
+
+# Workaround because one above doesn't work
+*.sh linguist-language=C
