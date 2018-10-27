@@ -1,0 +1,9 @@
+
+#!/bin/sh
+
+echo "Lua version:"
+time lua fib.lua > /dev/null
+
+echo ""
+echo "Euboea version:"
+time ../euboea ../examples/fib.e > /dev/null
