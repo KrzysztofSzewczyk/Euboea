@@ -46,6 +46,10 @@
 *.mod*
 *.cmd
 .tmp_versions/
+
+attic/
+codegen.c
+
 modules.order
 Module.symvers
 Mkfile.old
