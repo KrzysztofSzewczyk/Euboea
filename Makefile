@@ -9,7 +9,6 @@ euboea.o: euboea.c
 clean:
 	$(RM) a.out euboea *.o *~ text euboea.o
 test: euboea
-	chmod 777 test
-	./test
+	/bin/sh test.sh
 	exit $(.SHELLSTATUS)
 
