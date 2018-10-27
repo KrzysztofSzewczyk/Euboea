@@ -1,0 +1,29 @@
+
+
+#!/bin/sh
+
+FACTORIAL_OUTPUT=$(./euboea examples/factorial.e)
+FIB_OUTPUT=$(./euboea examples/fib.e)
+FIB_CORRECT="832040"
+FACTORIAL_CORRECT="120"
+
+FAILED="❌"
+PASSED="✔️"
+
+flag=0
+
+if [ "$FACTORIAL_CORRECT" = "$FACTORIAL_OUTPUT" ]; then
+    echo "$PASSED  factorial.e"
+else
+    echo "$FAILED  factorial.e; got $FACTORIAL_OUTPUT, expected $FACTORIAL_CORRECT"
+    $flag = 1
+fi
+
+if [ "$FIB_CORRECT" = "$FIB_OUTPUT" ]; then
+    echo "$PASSED  fib.e"
+else
+    echo "$FAILED  fib.e; got $FIB_OUTPUT, expected $FIB_CORRECT"
+    $flag = 1
+fi
+
+exit $flag
