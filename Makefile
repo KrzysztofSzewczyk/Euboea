@@ -1,5 +1,5 @@
 
-CFLAGS = -Wall -m32 -mstackrealign -std=c89 -O3
+CFLAGS = -Wall -m32 -mstackrealign -std=c89 -O3 -Wno-char-subscripts
 C = $(CC) $(CFLAGS)
 
 euboea: lexer.o euboea.o codegen.o

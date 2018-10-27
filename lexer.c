@@ -5,11 +5,11 @@
 #include <stdlib.h>
 
 int32_t lex(char * code) {
-    int32_t codeSize = strlen(code), line = 1;
+    int32_t codeSize = strlen(code), line = 1, i = 0;
     int is_crlf = 0;
-    for (int32_t i = 0; i < codeSize; i++) {
+    for (; i < codeSize; i++) {
         if (tok_t.size <= i)
-            tok_t.tok_t = realloc(tok_t.tok_t, (tok_t.size += 512 * sizeof(Token)));
+            tok_t.tok_t = realloc(tok_t.tok_t, (tok_t.size += 512 * sizeof(token_t)));
         if (isdigit(code[i])) {
             for (; isdigit(code[i]); i++)
                 strncat(tok_t.tok_t[tok_t.pos].val, &(code[i]), 1);

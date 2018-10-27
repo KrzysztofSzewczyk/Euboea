@@ -23,12 +23,12 @@ static void setxor() {
 }
 
 void init() {
-    tok.pos = 0;
-    tok.size = 0xfff;
-    set_xor128();
-    tok.tok = calloc(sizeof(Token), tok.size);
-    brks.addr = calloc(sizeof(uint32_t), 1);
-    rets.addr = calloc(sizeof(uint32_t), 1);
+    tok_t.pos = 0;
+    tok_t.size = 0xfff;
+    setxor();
+    tok_t.tok_t = calloc(sizeof(token_t), tok_t.size);
+    brks_t.addr = calloc(sizeof(uint32_t), 1);
+    rets_t.addr = calloc(sizeof(uint32_t), 1);
 }
 
 static void freeadd() {
@@ -41,10 +41,10 @@ static void freeadd() {
 
 void dispose() {
     munmap(jit_buf, jit_sz);
-    free(brks.addr);
-    free(rets.addr);
-    free(tok.tok);
-    freeAddr();
+    free(brks_t.addr);
+    free(rets_t.addr);
+    free(tok_t.tok_t);
+    freeadd();
 }
 
 static void put_i32(int32_t n) {
@@ -60,7 +60,7 @@ static void put_ln() {
 }
 
 static void add_mem(int32_t addr) {
-    mem.addr[mem.count++] = addr;
+    memory.addr[memory.count++] = addr;
 }
 
 static int xor128() {
