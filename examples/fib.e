@@ -7,3 +7,5 @@ def fib(n)
 end
 
 puts fib(30)
+
+exit()
