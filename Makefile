@@ -14,8 +14,8 @@ euboea.o: euboea.c euboea.h
 lexer.o: lexer.c
 	$(C) -o $@ -c lexer.c
 
-codegen.o: codegen.dasc minilua
-	cat codegen.dasc | ./minilua dasm/dynasm.lua -o codegen.c -
+codegen.o: codegen.das minilua
+	cat codegen.das | ./minilua dasm/dynasm.lua -o codegen.c -
 	$(C) -o $@ -c codegen.c
 
 clean:
