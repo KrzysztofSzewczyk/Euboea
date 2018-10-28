@@ -8,6 +8,10 @@ euboea.o: euboea.c
 	$(C) -o $@ -c $^
 clean:
 	$(RM) a.out euboea *.o *~ text euboea.o
+coverage.o: euboea.c
+	$(C) -coverage -o $@ -c $^
+coverage: coverage.o
+	$(C) -coverage -o $@ $^
 test: euboea
 	/bin/sh test.sh
 	exit $(.SHELLSTATUS)
