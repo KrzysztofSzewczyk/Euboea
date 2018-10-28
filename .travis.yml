@@ -7,9 +7,13 @@ matrix:
       script:
         - sudo apt-get install gcc-multilib
         - make
-      after_success:
-        - bash <(curl -s https://codecov.io/bash)
     - language: c
       script:
         - sudo apt-get install gcc-multilib
         - make test
+    - language: c
+      script:
+        - sudo apt-get install gcc-multilib
+        - make coverage
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
