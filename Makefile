@@ -8,6 +8,14 @@ euboea.o: euboea.c
 	$(C) -o $@ -c $^
 clean:
 	$(RM) a.out euboea *.o *~ text euboea.o
+coverage.o: euboea.c
+	$(C) -coverage -o $@ -c $^
+coverage: coverage.o
+	$(C) -coverage -o $@ $^
+	/bin/sh test-coverage.sh
+	exit $(.SHELLSTATUS)
+	cp euboea.c coverage.c
+	gcov coverage.c
 test: euboea
 	/bin/sh test.sh
 	exit $(.SHELLSTATUS)
