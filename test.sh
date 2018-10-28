@@ -1,7 +1,7 @@
 
 testfactorial() {
     value=`./euboea examples/factorial.e`
-    assertEquals "factorial.e: It's not 1999 :-(" '120' "${value}"
+    assertEquals "factorial.e: Test failed." '120' "${value}"
 }
 
 testfibonacii() {
