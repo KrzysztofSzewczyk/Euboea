@@ -6,7 +6,7 @@ Euboea is blazingly fast and small programming language **compiled** JIT **direc
 
 | Build             | Tests             |
 |-------------------|-------------------|
-| [![Build 1](https://travis-matrix-badges.herokuapp.com/repos/kspalaiologos/Euboea/branches/master/1)](https://travis-ci.org/kspalaiologos/Euboea) <br> [![wercker status](https://app.wercker.com/status/eead1e3f0f850024dd70ee1f6fc65b5f/m/master "wercker status")](https://app.wercker.com/project/byKey/eead1e3f0f850024dd70ee1f6fc65b5f) | [![Build 2](https://travis-matrix-badges.herokuapp.com/repos/kspalaiologos/Euboea/branches/master/2)](https://travis-ci.org/kspalaiologos/Euboea) |
+| [![Build 1](https://travis-matrix-badges.herokuapp.com/repos/kspalaiologos/Euboea/branches/master/1)](https://travis-ci.org/kspalaiologos/Euboea) <br> [![wercker status](https://app.wercker.com/status/eead1e3f0f850024dd70ee1f6fc65b5f/m/master "wercker status")](https://app.wercker.com/project/byKey/eead1e3f0f850024dd70ee1f6fc65b5f) | Test: [![Build 2](https://travis-matrix-badges.herokuapp.com/repos/kspalaiologos/Euboea/branches/master/2)](https://travis-ci.org/kspalaiologos/Euboea) <br> Covs: [![Build 3](https://travis-matrix-badges.herokuapp.com/repos/kspalaiologos/Euboea/branches/master/3)](https://travis-ci.org/kspalaiologos/Euboea) |
 
 ## Philosophy
 Philosophy of Euboea includes following rules:
