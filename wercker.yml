@@ -1,0 +1,9 @@
+
+box: debian
+build:
+  steps:
+    - script:
+        name: build
+        code: |
+          sudo apt-get update
+          make
