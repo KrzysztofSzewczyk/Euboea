@@ -12,7 +12,9 @@ coverage.o: euboea.c
 	$(C) -coverage -o $@ -c $^
 coverage: coverage.o
 	$(C) -coverage -o $@ $^
-test: coverage
+	/bin/sh test.sh
+	exit $(.SHELLSTATUS)
+test: euboea
 	/bin/sh test.sh
 	exit $(.SHELLSTATUS)
 
