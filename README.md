@@ -3,6 +3,9 @@
 Euboea is blazingly fast and small programming language **compiled** JIT **directly to machine code**.
 
 ## Builds
+
+[![wercker status](https://app.wercker.com/status/eead1e3f0f850024dd70ee1f6fc65b5f/m/master "wercker status")](https://app.wercker.com/project/byKey/eead1e3f0f850024dd70ee1f6fc65b5f)
+
 | Build             | Tests             |
 |-------------------|-------------------|
 | [![Build 1](https://travis-matrix-badges.herokuapp.com/repos/kspalaiologos/Euboea/branches/master/1)](https://travis-ci.org/kspalaiologos/Euboea) | [![Build 2](https://travis-matrix-badges.herokuapp.com/repos/kspalaiologos/Euboea/branches/master/2)](https://travis-ci.org/kspalaiologos/Euboea) |
