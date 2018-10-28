@@ -1,6 +1,5 @@
 
 #define _BSD_SOURCE
-#include "dasm/dasm_x86.h"
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <sys/types.h>
