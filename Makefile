@@ -16,6 +16,7 @@ coverage: coverage.o
 	exit $(.SHELLSTATUS)
 	cp euboea.c coverage.c
 	gcov coverage.c
+	cat euboea.c.gcov
 test: euboea
 	/bin/sh test.sh
 	exit $(.SHELLSTATUS)
