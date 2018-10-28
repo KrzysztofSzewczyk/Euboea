@@ -14,6 +14,7 @@ coverage: coverage.o
 	$(C) -coverage -o $@ $^
 	/bin/sh test.sh
 	exit $(.SHELLSTATUS)
+	gcov euboea.c
 test: euboea
 	/bin/sh test.sh
 	exit $(.SHELLSTATUS)
