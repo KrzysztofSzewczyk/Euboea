@@ -9,9 +9,9 @@ euboea.o: euboea.c
 clean:
 	$(RM) a.out euboea *.o *~ text euboea.o
 coverage.o: euboea.c
-	$(C) -coverage -o $@ -c $^
+	$(CC) -Wall -m32 -mstackrealign -std=c89 -O3 -Wno-char-subscripts -coverage -o $@ -c $^
 coverage: coverage.o
-	$(C) -coverage -o $@ $^
+	$(CC) -Wall -m32 -mstackrealign -std=c89 -O0 -Wno-char-subscripts -coverage -o $@ $^
 	/bin/sh test-coverage.sh
 	exit $(.SHELLSTATUS)
 	cp euboea.c coverage.c
