@@ -14,4 +14,12 @@ testmixed() {
     assertEquals "mixed.e: Test failed." 'Constantinople fell in 1453' "${value}"
 }
 
+# Let's run examples
+cd examples
+for f in *.e; do ./../euboea $f; done
+cd ..
+
+# Now, let's run it on directory
+./euboea examples
+
 . ./tests/shunit2
