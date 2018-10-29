@@ -518,7 +518,7 @@ typedef struct {
 } var_t;
 
 typedef struct {
-    char val[32];
+    char val[128];
     int nline;
 } token_t;
 
