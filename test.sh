@@ -14,4 +14,8 @@ testmixed() {
     assertEquals "mixed.e: Test failed." 'Constantinople fell in 1453' "${value}"
 }
 
+cd examples
+for f in *.e; do ./../euboea $f; done
+cd ..
+
 . ./tests/shunit2
