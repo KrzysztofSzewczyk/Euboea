@@ -16,7 +16,7 @@ testmixed() {
 
 # Let's run examples
 cd examples
-for f in *.e; do ./../euboea $f; done
+for f in *.e; do ../euboea $f; done
 cd ..
 
 # Now, let's run it on directory
