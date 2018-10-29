@@ -22,4 +22,7 @@ cd ..
 # Now, let's run it on directory
 ./euboea examples
 
+# Or file
+./euboea non-existent-fie.e
+
 . ./tests/shunit2
