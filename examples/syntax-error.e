@@ -1,0 +1,4 @@
+
+# Simple syntax error.
+
+puts "
