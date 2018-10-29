@@ -16,13 +16,13 @@ testmixed() {
 
 # Let's run examples
 cd examples
-for f in *.e; do ../euboea $f; done
+for f in *.e; do ../coverage $f; done
 cd ..
 
 # Now, let's run it on directory
-./euboea examples
+./coverage examples
 
 # Or file
-./euboea non-existent-fie.e
+./coverage non-existent-fie.e
 
 . ./tests/shunit2
