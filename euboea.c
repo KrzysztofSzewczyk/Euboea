@@ -1,4 +1,7 @@
 
+/* EUBOEA programming language interpreter */
+/* Author: Kamila Szewczyk, License: MIT */
+
 #define _BSD_SOURCE
 #include <sys/mman.h>
 #include <sys/stat.h>
