@@ -1,4 +1,4 @@
-# Euboea
+# ![Euboea](logo.png)
 
 Euboea is blazingly fast and small programming language **compiled** JIT **directly to machine code**.
 
