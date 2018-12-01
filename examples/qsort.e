@@ -6,8 +6,8 @@ def qsort(a, left, right)
 	pv = l
 	while 1
 		while a[l] < a[pv]
-      l++
-    end
+                	l++
+    		end
 		while a[pv] < a[r]; r--; end
 		if l >= r break end
 		t = a[l]; a[l] = a[r]; a[r] = t;
