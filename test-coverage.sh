@@ -14,15 +14,12 @@ testmixed() {
     assertEquals "mixed.e: Test failed." 'Constantinople fell in 1453' "${value}"
 }
 
-# Let's run examples
 cd examples
 for f in *.e; do ../coverage $f; done
 cd ..
 
-# Now, let's run it on directory
 ./coverage examples
 
-# Or file
 ./coverage non-existent-fie.e
 
 . ./tests/shunit2
