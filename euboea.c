@@ -1003,7 +1003,7 @@ int expression(int pos, int status) {
         dasm_put(Dst, 18, end, pos);
         eval(end, 0);
         return 1;
-    } else if (skip("elsif")) {
+    } else if (skip("elif")) {
         int32_t endif = npc++;
         dasm_growpc(&d, npc);
         dasm_put(Dst, 18, endif, pos);
