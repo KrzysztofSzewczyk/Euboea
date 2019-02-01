@@ -32,4 +32,11 @@ On my PC, Euboea can be up to **4 times faster than Lua**
 
 You can check out the wiki! ![Link](https://github.com/kspalaiologos/Euboea/wiki)
 
+## Contributing
+
+Currently, I will merge pull requests helping with:
+ * Conforming to philosphy
+ * Adding more libc calls
+ * Increasing code coverage by pumping up more tests/examples
+
 [//]: # (Listening to https://www.youtube.com/watch?v=Dqzrofdwi-g once is one free hug to you)
