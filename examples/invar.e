@@ -1,3 +1,3 @@
 # Invalid variable declaration.
 
-$śćź = 123
+$321 = 123
