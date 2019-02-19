@@ -1,6 +1,6 @@
 # ![Euboea](logo.png)
 
-Euboea is blazingly fast and small programming language **compiled** JIT **directly to machine code**.
+Euboea is blazingly fast and small programming language **compiled** ahead-of-time **directly to machine code**.
 
 ## Builds
 
