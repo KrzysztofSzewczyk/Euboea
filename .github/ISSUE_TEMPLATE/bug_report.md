@@ -19,8 +19,8 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **System configuration:**
- - OS: [Windows 10]
- - Commit ID: [e.g. 10]
+ - OS: [e.g. Windows 10]
+ - Commit ID: [e.g. 9583a7d]
 
 **Additional context**
 Add any other context about the problem here.
