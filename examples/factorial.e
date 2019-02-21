@@ -7,14 +7,5 @@ def fact(n)
 	end
 end
 
-def txt(n)
-	if n <= 3
-		"N <= 3"
-	else
-		"N > 3"
-	end
-end
-
 puts fact(5)
-puts txt(3)
 
