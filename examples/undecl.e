@@ -1,0 +1,4 @@
+
+# Undeclarated variable
+
+puts abc
