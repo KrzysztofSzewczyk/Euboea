@@ -25,3 +25,5 @@ Philosophy of Euboea includes following rules:
 ## Handcrafted machine code branch
 
 This branch is left stale for the time being.
+
+This version of Euboea was just a proof-of-concept, newer and more advanced versions are located on master.
