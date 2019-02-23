@@ -3,6 +3,7 @@
 #include "codegen.h"
 #include "euboea.h"
 
+#define _BSD_SOURCE
 #include <unistd.h>
 
 void put_i32(int32_t n) {
