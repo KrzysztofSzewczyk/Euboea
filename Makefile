@@ -9,11 +9,7 @@ coverage: euboea.o
 	$(C) -o $@ $^
 	/bin/sh test-coverage.sh
 	exit $(.SHELLSTATUS)
-	cp euboea.c coverage
-	ls
-	gcov -a -b -c -r -f -u coverage.c
 	gcov -a -b -c -r -f -u euboea.c
-	ls
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
