@@ -22,7 +22,7 @@ def qsort(a, left, right)
 end
 
 max = 20
-a = Array(max)
+a = array(max)
 
 for i = 0, i < max, i++
 	printf "%c ", a[i] = 'a' + rand() % ('z' - 'a')
