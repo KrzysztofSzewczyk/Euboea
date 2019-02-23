@@ -3,6 +3,14 @@
 #include "codegen.h"
 #include "euboea.h"
 
+#ifndef usleep
+    void usleep(int s) {
+        struct timespec reqtime;
+        reqtime.tv_nsec = s * 1000;
+        nanosleep(&reqtime, NULL);
+    }
+#endif
+
 void put_i32(int32_t n) {
     printf("%d", n);
 }
