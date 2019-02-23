@@ -740,8 +740,3 @@ void cmpexpr() {
             dasm_put(Dst, 246);
     }
 }
-
-typedef struct {
-    char * name;
-    int args, addr;
-} stdfn;
