@@ -4,9 +4,9 @@ C = $(CC) $(CFLAGS)
 
 euboea: euboea.o
 	$(C) -o $@ $^
-coverage: CFLAGS = -coverage
+coverage: CFLAGS = -coverage -Wall -m32 -mstackrealign -std=c89 -O3 -Wno-char-subscripts
 coverage: euboea.o
-	$(C) -coverage -o $@ $^
+	$(C) -o $@ $^
 	/bin/sh test-coverage.sh
 	exit $(.SHELLSTATUS)
 	cp euboea.c coverage.c
