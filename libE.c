@@ -3,6 +3,8 @@
 #include "codegen.h"
 #include "euboea.h"
 
+#include <unistd.h>
+
 void put_i32(int32_t n) {
     printf("%d", n);
 }
