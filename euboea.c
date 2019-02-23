@@ -1320,7 +1320,7 @@ typedef struct {
 } stdfn;
 
 static stdfn stdfuncts[] = {
-    {"Array", 1, 12},
+    {"array", 1, 12},
     {"rand", 0, 16}, {"printf", -1, 20}, {"usleep", 1, 28},
     {"fprintf", -1, 36}, {"fgets", 3, 44},
     {"free", 1, 48}, {"freeLocal", 0, 52}, {"malloc", 1, 12}, {"exit", 1, 56},
@@ -1331,7 +1331,7 @@ int buildstd(char * name) {
     size_t i = 0;
     for (; i < sizeof(stdfuncts) / sizeof(stdfuncts[0]); i++) {
         if (!strcmp(stdfuncts[i].name, name)) {
-            if (!strcmp(name, "Array")) {
+            if (!strcmp(name, "array")) {
                 cmpexpr();
                 dasm_put(Dst, 249, 12, 24);
             } else {
