@@ -15,9 +15,13 @@
 #include <stddef.h>
 #include <stdarg.h>
 
+#include "codegen.h"
+
 extern void * jit_buf;
 extern size_t jit_sz;
 extern int npc;
+extern dasm_State * d;
+extern dasm_State ** Dst = &d;
 
 enum { IN_GLOBAL = 0, IN_FUNC };
 enum { BLOCK_LOOP = 1, BLOCK_FUNC };
