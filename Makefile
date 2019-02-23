@@ -1,5 +1,5 @@
 
-CFLAGS = -Wall -m32 -mstackrealign -std=c89 -O3 -Wno-char-subscripts
+CFLAGS = -Wall -m32 -mstackrealign -std=c89 -O3 -Wno-char-subscripts -D_POSIX_C_SOURCE=199309L
 C = $(CC) $(CFLAGS)
 
 OBJ = $(patsubst %.c, %.o, $(wildcard *.c))
@@ -7,7 +7,7 @@ OBJ = $(patsubst %.c, %.o, $(wildcard *.c))
 euboea: $(OBJ)
 	$(C) -o $@ $^
 
-coverage: CFLAGS = -coverage -Wall -m32 -mstackrealign -std=c89 -O3 -Wno-char-subscripts
+coverage: CFLAGS = -coverage -Wall -m32 -mstackrealign -std=c89 -O3 -Wno-char-subscripts -D_POSIX_C_SOURCE=199309L
 coverage: $(OBJ)
 	$(C) -o $@ $^
 	/bin/sh test-coverage.sh
