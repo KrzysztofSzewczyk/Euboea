@@ -74,6 +74,7 @@ var_t * getvar(char *);
 void cmpexpr();
 int execute(char * source);
 void add_mem(int32_t addr);
+void freeadd();
 
 extern unsigned int w;
 
