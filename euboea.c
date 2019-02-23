@@ -485,6 +485,8 @@ int dasm_checkstep(Dst_DECL, int secmatch) {
 }
 #endif
 
+static unsigned int w;
+
 static void setxor() {
     w = 1234 + (getpid() ^ 0xFFBA9285);
 }
