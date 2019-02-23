@@ -39,7 +39,7 @@ void dispose() {
     freeadd();
 }
 
-static void add_mem(int32_t addr) {
+void add_mem(int32_t addr) {
     memory.addr[memory.count++] = addr;
 }
 
