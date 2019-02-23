@@ -2,6 +2,8 @@
 #ifndef _LIBE_H
 #define _LIBE_H
 
+#include <stdint.h>
+
 typedef struct {
     char * name;
     int args, addr;
