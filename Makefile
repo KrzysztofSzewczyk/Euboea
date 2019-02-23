@@ -2,21 +2,26 @@
 CFLAGS = -Wall -m32 -mstackrealign -std=c89 -O3 -Wno-char-subscripts
 C = $(CC) $(CFLAGS)
 
-euboea: euboea.o
+OBJ = $(patsubst %.c, %.o, $(wildcard *.c))
+
+euboea: $(OBJ)
 	$(C) -o $@ $^
-euboea.o: euboea.c
-	$(C) -o $@ -c $^
-clean:
-	$(RM) a.out euboea *.o *~ text euboea.o
-coverage.o: euboea.c
-	$(C) -coverage -o $@ -c $^
-coverage: coverage.o
-	$(C) -coverage -o $@ $^
+
+coverage: CFLAGS = -coverage -Wall -m32 -mstackrealign -std=c89 -O3 -Wno-char-subscripts
+coverage: $(OBJ)
+	$(C) -o $@ $^
 	/bin/sh test-coverage.sh
 	exit $(.SHELLSTATUS)
-	cp euboea.c coverage.c
-	gcov -a -b -c -r -f -u coverage.c
-	cat euboea.c.gcov
+	gcov -a -b -c -r -f -u *.c
+
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+.PHONY: clean
+clean:
+	rm -f euboea *.o
+
+.PHONY: test
 test: euboea
 	/bin/sh test.sh
 	exit $(.SHELLSTATUS)
