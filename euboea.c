@@ -3,8 +3,10 @@
 /* Author: Kamila "Palaiologos" Szewczyk, License: MIT */
 
 #define _BSD_SOURCE
+
 #include "euboea.h"
 #include "codegen.h"
+#include "libE.h"
 
 static unsigned int w;
 
