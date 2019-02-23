@@ -21,7 +21,7 @@ extern void * jit_buf;
 extern size_t jit_sz;
 extern int npc;
 extern dasm_State * d;
-extern dasm_State ** Dst = &d;
+extern dasm_State ** Dst;
 
 enum { IN_GLOBAL = 0, IN_FUNC };
 enum { BLOCK_LOOP = 1, BLOCK_FUNC };
