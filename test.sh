@@ -1,3 +1,4 @@
+#!/bin/sh
 
 testfactorial() {
     value=`./euboea examples/factorial.e`
