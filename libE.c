@@ -1,6 +1,7 @@
 
 #include "libE.h"
 #include "codegen.h"
+#include "euboea.h"
 
 void put_i32(int32_t n) {
     printf("%d", n);
@@ -53,3 +54,12 @@ int buildstd(char * name) {
     }
     return 0;
 }
+
+void * funcTable[] = {
+    put_i32, /*  0 */ put_str, /*  4 */ put_ln,  /*  8 */ malloc, /* 12 */
+    xor128,  /* 16 */ printf,  /* 20 */ add_mem, /* 24 */ usleep, /* 28 */
+    read,    /* 32 */ fprintf, /* 36 */ write,   /* 40 */ fgets,  /* 44 */
+    free,    /* 48 */ freeadd, /* 52 */ exit,    /* 56 */ abort,  /* 60 */
+    close    /* 72 */
+};
+
