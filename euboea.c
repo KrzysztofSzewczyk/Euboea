@@ -126,7 +126,7 @@ static const unsigned char euboeaactions[269] = {
 
 dasm_State * d;
 
-static dasm_State ** Dst = &d;
+dasm_State ** Dst = &d;
 
 void * euboealabels[L__MAX];
 void * jit_buf;
