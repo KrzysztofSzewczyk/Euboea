@@ -4,9 +4,9 @@ Euboea is blazingly fast and small programming language **compiled** ahead-of-ti
 
 ## Builds
 
-| Build             | Tests             |
-|-------------------|-------------------|
-| [![Build 1](https://travis-matrix-badges.herokuapp.com/repos/kspalaiologos/Euboea/branches/master/1)](https://travis-ci.org/kspalaiologos/Euboea) <br> [![wercker status](https://app.wercker.com/status/eead1e3f0f850024dd70ee1f6fc65b5f/m/master "wercker status")](https://app.wercker.com/project/byKey/eead1e3f0f850024dd70ee1f6fc65b5f) | Test build: [![Build 2](https://travis-matrix-badges.herokuapp.com/repos/kspalaiologos/Euboea/branches/master/2)](https://travis-ci.org/kspalaiologos/Euboea) <br> Cov build: [![Build 3](https://travis-matrix-badges.herokuapp.com/repos/kspalaiologos/Euboea/branches/master/3)](https://travis-ci.org/kspalaiologos/Euboea) <br> Coverage: [![Coverage status](https://codecov.io/gh/kspalaiologos/Euboea/branch/master/graph/badge.svg)](https://codecov.io/github/kspalaiologos/Euboea?branch=master) |
+| Build             | Tests             | Misc |
+|-------------------|-------------------|------|
+| [![Build 1](https://travis-matrix-badges.herokuapp.com/repos/kspalaiologos/Euboea/branches/master/1)](https://travis-ci.org/kspalaiologos/Euboea) <br> [![wercker status](https://app.wercker.com/status/eead1e3f0f850024dd70ee1f6fc65b5f/m/master "wercker status")](https://app.wercker.com/project/byKey/eead1e3f0f850024dd70ee1f6fc65b5f) | Test build: [![Build 2](https://travis-matrix-badges.herokuapp.com/repos/kspalaiologos/Euboea/branches/master/2)](https://travis-ci.org/kspalaiologos/Euboea) <br> Cov build: [![Build 3](https://travis-matrix-badges.herokuapp.com/repos/kspalaiologos/Euboea/branches/master/3)](https://travis-ci.org/kspalaiologos/Euboea) <br> Coverage: [![Coverage status](https://codecov.io/gh/kspalaiologos/Euboea/branch/master/graph/badge.svg)](https://codecov.io/github/kspalaiologos/Euboea?branch=master) | [![CodeFactor](https://www.codefactor.io/repository/github/kamilaszewczyk/euboea/badge)](https://www.codefactor.io/repository/github/kamilaszewczyk/euboea) |
 
 
 
