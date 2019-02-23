@@ -3,6 +3,8 @@
 #include "codegen.h"
 #include "euboea.h"
 
+#include <time.h>
+
 #ifndef usleep
     void usleep(int s) {
         struct timespec reqtime;
