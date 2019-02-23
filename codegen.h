@@ -2,6 +2,19 @@
 #ifndef _CODEGEN_H
 #define _CODEGEN_H
 
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <ctype.h>
+#include <time.h>
+#include <stddef.h>
+#include <stdarg.h>
+
 #if !defined(MAP_ANONYMOUS) && defined(MAP_ANON)
     #define MAP_ANONYMOUS MAP_ANON
 #endif
