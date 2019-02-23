@@ -70,6 +70,4 @@ var_t * getvar(char *);
 void cmpexpr();
 int execute(char * source);
 
-static unsigned int w;
-
 #endif
