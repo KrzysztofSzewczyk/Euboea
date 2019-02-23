@@ -9,7 +9,7 @@ typedef struct {
     int args, addr;
 } stdfn;
 
-stdfn stdfuncts[] = {
+static stdfn stdfuncts[] = {
     {"array", 1, 12},
     {"rand", 0, 16}, {"printf", -1, 20}, {"usleep", 1, 28},
     {"fprintf", -1, 36}, {"fgets", 3, 44},
