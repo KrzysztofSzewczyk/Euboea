@@ -8,7 +8,7 @@
 #include "codegen.h"
 #include "libE.h"
 
-static unsigned int w;
+unsigned int w;
 
 static void setxor() {
     w = 1234 + (getpid() ^ 0xFFBA9285);
