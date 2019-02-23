@@ -23,7 +23,7 @@ void init() {
     rets_t.addr = calloc(sizeof(uint32_t), 1);
 }
 
-static void freeadd() {
+void freeadd() {
     if (memory.count > 0) {
         for (--memory.count; memory.count >= 0; --memory.count)
             free((void *)memory.addr[memory.count]);
