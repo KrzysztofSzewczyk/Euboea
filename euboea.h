@@ -69,6 +69,7 @@ func_t * getfn(char *);
 var_t * getvar(char *);
 void cmpexpr();
 int execute(char * source);
+void add_mem(int32_t addr);
 
 extern unsigned int w;
 
