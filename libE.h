@@ -15,7 +15,7 @@ stdfn stdfuncts[] = {
     {"abort", 0, 60}, {"read", 3, 32}, {"write", 3, 40}, {"close", 1, 64}
 };
 
-extern void ** funcTable;
+extern void * funcTable[];
 
 extern int buildstd(char *);
 extern void put_i32(int32_t n);
