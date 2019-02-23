@@ -1,3 +1,4 @@
+#!/bin/sh
 
 cd examples
 for f in *.e; do ../coverage $f; done
