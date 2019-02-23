@@ -81,9 +81,6 @@ DASM_FDEF int dasm_checkstep(Dst_DECL, int secmatch);
 #define dasm_checkstep(a, b)	0
 #endif
 
-
-#define DASM_ARCH		"x86"
-
 #ifndef DASM_EXTERN
     #define DASM_EXTERN(a,b,c,d)	0
 #endif
