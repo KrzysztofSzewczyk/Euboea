@@ -61,8 +61,8 @@ struct {
 } memory;
 
 int error(char *, ...);
-int lex(char *);
-int32_t skip(char * s);
+int lex(char *, int32_t);
+int32_t skip(char *);
 void asmexpr();
 int isassign();
 int assignment();
@@ -72,8 +72,8 @@ char * getstr();
 func_t * getfn(char *);
 var_t * getvar(char *);
 void cmpexpr();
-int execute(char * source);
-void add_mem(int32_t addr);
+int execute(char * , int32_t);
+void add_mem(int32_t);
 void freeadd();
 
 extern unsigned int w;
