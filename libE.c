@@ -5,11 +5,15 @@
 
 #include <time.h>
 
-void sleep(int s) {
-    struct timespec reqtime;
-    reqtime.tv_nsec = s * 1000;
-    nanosleep(&reqtime, NULL);
-}
+#ifndef esleep
+    void esleep(int s) {
+        struct timespec reqtime;
+        reqtime.tv_nsec = s * 1000;
+        nanosleep(&reqtime, NULL);
+    }
+#else
+    #define esleep usleep
+#endif
 
 void put_i32(int32_t n) {
     printf("%d", n);
@@ -65,7 +69,7 @@ int buildstd(char * name) {
 
 void * funcTable[] = {
     put_i32, /*  0 */ put_str, /*  4 */ put_ln,  /*  8 */ malloc, /* 12 */
-    xor128,  /* 16 */ printf,  /* 20 */ add_mem, /* 24 */ sleep,  /* 28 */
+    xor128,  /* 16 */ printf,  /* 20 */ add_mem, /* 24 */ esleep, /* 28 */
     read,    /* 32 */ fprintf, /* 36 */ write,   /* 40 */ fgets,  /* 44 */
     free,    /* 48 */ freeadd, /* 52 */ exit,    /* 56 */ abort,  /* 60 */
     close    /* 72 */
