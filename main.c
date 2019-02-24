@@ -25,5 +25,5 @@ int main(int argc, char ** argv) {
     src = calloc(sizeof(char), ssz + 2);
     fread(src, sizeof(char), ssz, fp);
     fclose(fp);
-    return execute(src);
+    return execute(src, ssz);
 }
