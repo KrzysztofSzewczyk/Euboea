@@ -383,7 +383,7 @@ int expression(int pos, int status) {
         fnc_t.inside = IN_GLOBAL;
     } else if (isassign())
         assignment();
-    else if ((isputs = skip("puts")) || skip("output")) {
+    else if (isputs = skip("puts")) {
         do {
             int isstring = 0;
             if (skip("\"")) {
