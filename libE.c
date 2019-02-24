@@ -11,6 +11,8 @@
         reqtime.tv_nsec = s * 1000;
         nanosleep(&reqtime, NULL);
     }
+#else
+    #define esleep usleep
 #endif
 
 void put_i32(int32_t n) {
