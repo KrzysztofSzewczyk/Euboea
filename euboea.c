@@ -43,8 +43,8 @@ void add_mem(int32_t addr) {
     memory.addr[memory.count++] = addr;
 }
 
-int32_t lex(char * code) {
-    int32_t codeSize = strlen(code), line = 1, i = 0;
+int32_t lex(char * code, int32_t codeSize) {
+    int32_t , line = 1, i = 0;
     int is_crlf = 0;
     for (; i < codeSize; i++) {
         if (tok_t.size <= i)
@@ -92,10 +92,10 @@ int32_t lex(char * code) {
     return 0;
 }
 
-int execute(char * source) {
+int execute(char * source, int32_t length) {
     int (*jit_main)(int *, void **);
     init();
-    lex(source);
+    lex(source, length);
     jit_main = parser();
     jit_main(0, funcTable);
     dispose();
