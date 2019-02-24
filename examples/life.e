@@ -54,8 +54,7 @@ end
 
 init()
 
-for i = 0, i < 20000, i++
+for i = 0, i < 20, i++
 	gen()
 	show()
-	sleep(50)
 end
