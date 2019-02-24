@@ -1,2 +1,2 @@
-printf "2 + 2 = %d" 2 + 2
+printf "2 + 2 = %d", 2 + 2
 exit()
