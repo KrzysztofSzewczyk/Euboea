@@ -4,16 +4,25 @@ matrix:
   sudo: true
   include:
     - language: c
+      addons:
+        apt:
+          packages:
+            - gcc-multilib
       script:
-        - sudo apt-get install gcc-multilib
         - make
     - language: c
+      addons:
+        apt:
+          packages:
+            - gcc-multilib
       script:
-        - sudo apt-get install gcc-multilib
         - make test
     - language: c
+      addons:
+        apt:
+          packages:
+            - gcc-multilib
       script:
-        - sudo apt-get install gcc-multilib
         - make coverage
       after_success:
         - bash <(curl -s https://codecov.io/bash)
