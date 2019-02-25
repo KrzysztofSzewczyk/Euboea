@@ -12,21 +12,21 @@ matrix:
           packages:
             - gcc-multilib
       script:
-        - make
+        - make clean euboea
     - language: c
       addons:
         apt:
           packages:
             - gcc-multilib
       script:
-        - make test
+        - make clean test
     - language: c
       addons:
         apt:
           packages:
             - gcc-multilib
       script:
-        - make coverage
+        - make clean coverage
       after_success:
         - bash <(curl -s https://codecov.io/bash)
   cache: apt
