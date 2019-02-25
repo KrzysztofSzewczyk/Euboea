@@ -4,6 +4,9 @@ matrix:
   sudo: true
   include:
     - language: c
+      cache:
+        directories:
+          - euboea
       addons:
         apt:
           packages:
