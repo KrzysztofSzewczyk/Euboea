@@ -1,5 +1,5 @@
 
-CFLAGS = -Wall -m32 -mstackrealign -std=c89 -O3 -Wno-char-subscripts -D_POSIX_C_SOURCE=199309L
+CFLAGS = -Wall -m32 -mstackrealign -std=c89 -O0 -Wno-char-subscripts -D_POSIX_C_SOURCE=199309L
 C = $(CC) $(CFLAGS)
 
 OBJ = $(patsubst %.c, %.o, $(wildcard *.c))
