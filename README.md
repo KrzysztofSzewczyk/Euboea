@@ -14,7 +14,7 @@ Euboea is blazingly fast and small programming language **compiled** ahead-of-ti
 Philosophy of Euboea includes following rules:
 
 * **Fast** language compiled to machine code.
-* Use **AOT** compilation.
+* Use **JIT** compilation.
 * Include **minimal usable set of keywords and control structures**.
 * Allow **simple cooperation with C**.
 * **No access to files** on physical drive.
