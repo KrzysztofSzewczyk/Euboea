@@ -7,7 +7,7 @@ OBJ = $(patsubst %.c, %.o, $(wildcard *.c))
 euboea: $(OBJ)
 	$(C) -o $@ $^
 
-coverage: CFLAGS = -coverage -Wall -m32 -mstackrealign -std=c89 -O3 -Wno-char-subscripts -D_POSIX_C_SOURCE=199309L
+coverage: CFLAGS = -coverage -Wall -m32 -mstackrealign -std=c89 -O3 -Wno-char-subscripts -D_POSIX_C_SOURCE=199309L -DNVARARG
 coverage: $(OBJ)
 	$(C) -o $@ $^
 	/bin/sh test-coverage.sh
