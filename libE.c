@@ -64,11 +64,13 @@ int buildstd(char * name) {
             } else {
                 if (stdfuncts[i].args == -1) {
                     uint32_t a = 0;
+                    #ifndef NVARARG
                     do {
                         cmpexpr();
                         dasm_put(Dst, 86, a);
                         a += 4;
                     } while (skip(","));
+                    #endif
                 } else {
                     int arg = 0;
                     for (; arg < stdfuncts[i].args; arg++) {
