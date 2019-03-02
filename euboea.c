@@ -25,11 +25,11 @@
 
 unsigned int w;
 
-static void setxor() {
+static void setxor(void) {
     w = 1234 + (getpid() ^ 0xFFBA9285);
 }
 
-void init() {
+void init(void) {
     tok_t.pos = 0;
     tok_t.size = 0xfff;
     setxor();
@@ -38,7 +38,7 @@ void init() {
     rets_t.addr = calloc(sizeof(uint32_t), 1);
 }
 
-void freeadd() {
+void freeadd(void) {
     if (memory.count > 0) {
         for (--memory.count; memory.count >= 0; --memory.count)
             free((void *)memory.addr[memory.count]);
@@ -46,7 +46,7 @@ void freeadd() {
     }
 }
 
-void dispose() {
+void dispose(void) {
     munmap(jit_buf, jit_sz);
     free(brks_t.addr);
     free(rets_t.addr);
@@ -172,13 +172,13 @@ struct {
     int count, inside, now;
 } fnc_t;
 
-void initjit() {
+void initjit(void) {
     dasm_init(&d, 1);
     dasm_setupglobal(&d, euboealabels, L__MAX);
     dasm_setup(&d, euboeaactions);
 }
 
-void * deinitjit() {
+void * deinitjit(void) {
     dasm_link(&d, &jit_sz);
     jit_buf = mmap(0, jit_sz, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
     dasm_encode(&d, jit_buf);
@@ -186,7 +186,7 @@ void * deinitjit() {
     return jit_buf;
 }
 
-char * getstr() {
+char * getstr(void) {
     str_t.text[str_t.count] = calloc(sizeof(char), strlen(tok_t.tok_t[tok_t.pos].val) + 1);
     strcpy(str_t.text[str_t.count], tok_t.tok_t[tok_t.pos++].val);
     return str_t.text[str_t.count++];
@@ -240,7 +240,7 @@ static func_t * appfn(char * name, int address, int espBgn, int args) {
     return &fnc_t.func[fnc_t.count++];
 }
 
-static int32_t mkbrk() {
+static int32_t mkbrk(void) {
     uint32_t lbl = npc++;
     dasm_growpc(&d, npc);
     dasm_put(Dst, 0, lbl);
@@ -249,7 +249,7 @@ static int32_t mkbrk() {
     return brks_t.count++;
 }
 
-static int32_t mkret() {
+static int32_t mkret(void) {
     cmpexpr();
     int lbl = npc++;
     dasm_growpc(&d, npc);
@@ -285,7 +285,7 @@ static int eval(int pos, int status) {
     return 0;
 }
 
-static var_t * mkvar() {
+static var_t * mkvar(void) {
     int32_t npos = tok_t.pos;
     if (isalpha(tok_t.tok_t[tok_t.pos].val[0])) {
         tok_t.pos++;
@@ -310,7 +310,7 @@ static var_t * mkvar() {
     return NULL;
 }
 
-static int chkstmt() {
+static int chkstmt(void) {
     cmpexpr();
     uint32_t end = npc++;
     dasm_growpc(&d, npc);
@@ -318,7 +318,7 @@ static int chkstmt() {
     return eval(end, 0);
 }
 
-static int whilestmt() {
+static int whilestmt(void) {
     uint32_t loopBgn = npc++;
     dasm_growpc(&d, npc);
     dasm_put(Dst, 16, loopBgn);
@@ -347,7 +347,7 @@ static int whilestmt() {
     return 0;
 }
 
-static int32_t fnstmt() {
+static int32_t fnstmt(void) {
     int32_t argsc = 0;
     int i = 0;
     char * funcName = tok_t.tok_t[tok_t.pos++].val;
@@ -504,7 +504,7 @@ int (*parser())(int *, void **) {
     return ((int (*)(int *, void **))euboealabels[L_START]);
 }
 
-int32_t isassign() {
+int32_t isassign(void) {
     char * val = tok_t.tok_t[tok_t.pos + 1].val;
     if (!strcmp(val, "=") || !strcmp(val, "++") || !strcmp(val, "--")) return 1;
     if (!strcmp(val, "[")) {
@@ -523,7 +523,7 @@ int32_t isassign() {
     return 0;
 }
 
-int32_t assignment() {
+int32_t assignment(voidvoid) {
     var_t * v = getvar(tok_t.tok_t[tok_t.pos].val);
     int32_t inc = 0, dec = 0, declare = 0;
     if (v == NULL) {
@@ -600,11 +600,11 @@ int32_t assignment() {
 }
 extern int buildstd(char *);
 
-static int32_t isidx() {
+static int32_t isidx(void) {
     return !strcmp(tok_t.tok_t[tok_t.pos].val, "[");
 }
 
-static void priexp() {
+static void priexp(void) {
     if (isdigit(tok_t.tok_t[tok_t.pos].val[0]))
         dasm_put(Dst, 62, atoi(tok_t.tok_t[tok_t.pos++].val));
 
@@ -682,7 +682,7 @@ static void priexp() {
     }
 }
 
-static void muldivexp() {
+static void muldivexp(void) {
     int32_t mul = 0, div = 0;
     priexp();
     while ((mul = skip("*")) || (div = skip("/")) || skip("%")) {
@@ -700,7 +700,7 @@ static void muldivexp() {
     }
 }
 
-static void addSubExpr() {
+static void addSubExpr(void) {
     int32_t add;
     muldivexp();
     while ((add = skip("+")) || skip("-")) {
@@ -715,7 +715,7 @@ static void addSubExpr() {
     }
 }
 
-static void logicexp() {
+static void logicexp(void) {
     int32_t lt = 0, gt = 0, ne = 0, eql = 0, fle = 0;
     addSubExpr();
     if ((lt = skip("<")) || (gt = skip(">")) || (ne = skip("!=")) ||
@@ -739,7 +739,7 @@ static void logicexp() {
     }
 }
 
-void cmpexpr() {
+void cmpexpr(void) {
     int and = 0, or = 0;
     logicexp();
     while ((and = skip("and") || skip("&")) ||
