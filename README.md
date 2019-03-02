@@ -15,6 +15,22 @@ Euboea is blazingly fast and small programming language **compiled** just-in-tim
 make euboea && ./euboea [source file]
 ```
 
+## Get in touch!
+
+```
+for i = 1, i < 30, i = i + 1
+	if i % 15 == 0
+		puts "fizzbuzz"
+	elif i % 5 == 0
+		puts "buzz"
+	elif i % 3 == 0
+		puts "fizz"
+	else
+		puts i 
+	end
+end
+```
+
 ## Supported platforms
 
 Euboea highly relies on x86. Also currently it's tightly bound to POSIX.
