@@ -41,11 +41,11 @@ void put_str(int32_t * n) {
     printf("%s", (char *) n);
 }
 
-void put_ln() {
+void put_ln(void) {
     printf("\n");
 }
 
-int xor128() {
+int xor128(void) {
     static uint32_t x = 123456789, y = 362436069, z = 521288629;
     uint32_t t;
     t = x ^ (x << 11);
