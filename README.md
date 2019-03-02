@@ -15,6 +15,10 @@ Euboea is blazingly fast and small programming language **compiled** just-in-tim
 make euboea && ./euboea [source file]
 ```
 
+## Supported platforms
+
+Euboea highly relies on x86. Also currently it's tightly bound to POSIX.
+
 ## Philosophy
 Philosophy of Euboea includes the following rules:
 
