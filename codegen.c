@@ -366,8 +366,6 @@ int dasm_getpclabel(Dst_DECL, unsigned int pc) {
         int pos = D->pclabels[pc];
         if (pos < 0)
             return *DASM_POS2PTR(D, -pos);
-        if (pos > 0)
-            return -1;  /* Undefined. */
     }
     return -2;  /* Unused or out of range. */
 }
