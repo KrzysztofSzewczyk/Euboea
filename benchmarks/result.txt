@@ -1,0 +1,48 @@
+
+The lower grade is, the better language runtime
+performs.
+
+[Fib] Lua version:
+	User time (seconds): 0.13
+	Percent of CPU this job got: 99%
+	Maximum resident set size (kbytes): 2364
+	Grade: 30424,68
+[Fib] Euboea version:
+	User time (seconds): 0.01
+	Percent of CPU this job got: 75%
+	Maximum resident set size (kbytes): 1380
+	Grade: 1035
+[Fib] JavaScript version:
+	User time (seconds): 0.07
+	Percent of CPU this job got: 98%
+	Maximum resident set size (kbytes): 29756
+	Grade: 204126,16
+[Pi] Lua version:
+	User time (seconds): 65.63
+	Percent of CPU this job got: 99%
+	Maximum resident set size (kbytes): 6692
+	Grade: 43493650,2
+[Pi] Euboea version:
+	User time (seconds): 3.40
+	Percent of CPU this job got: 99%
+	Maximum resident set size (kbytes): 1836
+	Grade: 617997,6
+[Pi] JavaScript version:
+	User time (seconds): 13.32
+	Percent of CPU this job got: 150%
+	Maximum resident set size (kbytes): 40484
+	Grade: 81069210
+
+Total	     Lua grade: 43524074,88
+Total	  Euboea grade:	  619032,60
+Total JavaScript grade: 81273336,16
+
+Grades relative to Euboea:
+ => Lua:	~ 70,310
+ => JavaScript: ~131,291
+
+Results:
+ * Euboea is around 70 times more efficent than Lua in terms of CPU time and memory
+ * Euboea is around 131,3 times more efficent than JavaScript in terms of CPU time and memory
+
+Source build: https://travis-ci.org/kspalaiologos/Euboea/jobs/501122979
