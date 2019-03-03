@@ -1,8 +1,16 @@
 #!/bin/sh
 
-echo "Lua version:"
+echo "[Fib] Lua version:"
 time lua fib.lua > /dev/null
 
 echo ""
-echo "Euboea version:"
+echo "[Fib] Euboea version:"
 time ../euboea ../examples/fib.e > /dev/null
+
+echo ""
+echo "[Pi] Lua version:"
+time lua pi.lua > /dev/null
+
+echo ""
+echo "[Pi] Euboea version:"
+time ../euboea ../examples/pi.e > /dev/null
