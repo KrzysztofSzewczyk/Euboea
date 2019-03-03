@@ -13,12 +13,12 @@ time node fib.js > /dev/null
 
 echo ""
 echo "[Pi] Lua version:"
-time lua pi.lua > /dev/null
+time lua pi.lua
 
 echo ""
 echo "[Pi] Euboea version:"
-time ../euboea ../examples/pi.e > /dev/null
+time ../euboea ../examples/pi.e
 
 echo ""
 echo "[Pi] JavaScript version:"
-time node pi.js > /dev/null
+time node pi.js
