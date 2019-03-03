@@ -8,4 +8,4 @@ build:
           sudo apt-get update
           echo Y | sudo apt-get install build-essential
           echo Y | sudo apt-get install gcc-multilib
-          make
+          make euboea
