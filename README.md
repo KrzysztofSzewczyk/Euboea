@@ -51,7 +51,7 @@ Philosophy of Euboea includes the following rules:
 ## Speed
 
 You can check the speed of Euboea yourself, or check out speed using premade microbenchmark in benchmarks directory.
-On my PC, Euboea can be up to **4 times faster than PUC-Rio Lua**
+On my PC, Euboea can be up to **20 times faster than PUC-Rio Lua in microbenchmarks**
 
 ## Learning Euboea
 
