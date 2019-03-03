@@ -1,25 +1,4 @@
 
-String.prototype.sprintf = function() {
-	var args = arguments;
-	var index = 0;
-	var x;
-	var ins;
-	var fn;
-
-	return this.replace(String.prototype.sprintf.re, function() {
-		if (arguments[0] == "%%") {
-			return "%";
-		}
-		x = [];
-		for (var i = 0; i < arguments.length; i++) {
-			x[i] = arguments[i] || '';
-		}
-		x[3] = x[3].slice(-1) || ' ';
-		ins = args[+x[1] ? x[1] - 1 : index++];
-		return String.prototype.sprintf[x[6]](ins, x);
-	});
-};
-
 function pi() {
     N = 14 * 5000
     NM = N - 14
@@ -49,7 +28,7 @@ function pi() {
             d = d / g
             b = b - 1
         }
-        console.log("%04d".sprintf(e + d / f))
+        process.stdout.write((Math.floor(e + d / f)).toString().padStart(4, "0"))
         if(cnt % 16 == 0) {
             console.log("")
         }
