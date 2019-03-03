@@ -36,7 +36,7 @@ matrix:
             - gcc-multilib
             - lua50
       script:
-        - make clean all
+        - make clean euboea
         - cd benchmarks && for i in {1..10}; do /bin/sh benchmark; done
       after_success:
         - bash <(curl -s https://codecov.io/bash)
