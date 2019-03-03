@@ -29,4 +29,14 @@ matrix:
         - make clean coverage
       after_success:
         - bash <(curl -s https://codecov.io/bash)
+    - language: c
+      addons:
+        apt:
+          packages:
+            - gcc-multilib
+      script:
+        - make clean all
+        - for i in {1..10}; do /bin/sh benchmarks/benchmark; done
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
   cache: apt
