@@ -5,8 +5,8 @@ $map = 0
 $data = 0
 
 def init
-	map = Array((X+1)*(Y+1))
-	data = Array((X+1)*(Y+1))
+	map = array((X+1)*(Y+1))
+	data = array((X+1)*(Y+1))
 	for y = 0, y <= Y, y++
 		for x = 0, x <= X, x++
 			map[y * Y + x] = data[y * Y + x] = 0
