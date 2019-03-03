@@ -8,9 +8,17 @@ echo "[Fib] Euboea version:"
 time ../euboea ../examples/fib.e > /dev/null
 
 echo ""
+echo "[Fib] JavaScript version:"
+time node fib.js > /dev/null
+
+echo ""
 echo "[Pi] Lua version:"
 time lua pi.lua > /dev/null
 
 echo ""
 echo "[Pi] Euboea version:"
 time ../euboea ../examples/pi.e > /dev/null
+
+echo ""
+echo "[Pi] JavaScript version:"
+time node pi.js > /dev/null
