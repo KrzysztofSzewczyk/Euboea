@@ -1,24 +1,24 @@
 #!/bin/sh
 
 echo "[Fib] Lua version:"
-time lua fib.lua > /dev/null
+/usr/bin/time -v lua fib.lua > /dev/null
 
 echo ""
 echo "[Fib] Euboea version:"
-time ../euboea ../examples/fib.e > /dev/null
+/usr/bin/time -v ../euboea ../examples/fib.e > /dev/null
 
 echo ""
 echo "[Fib] JavaScript version:"
-time node fib.js > /dev/null
+/usr/bin/time -v node fib.js > /dev/null
 
 echo ""
 echo "[Pi] Lua version:"
-time lua pi.lua
+/usr/bin/time -v lua pi.lua
 
 echo ""
 echo "[Pi] Euboea version:"
-time ../euboea ../examples/pi.e
+/usr/bin/time -v ../euboea ../examples/pi.e
 
 echo ""
 echo "[Pi] JavaScript version:"
-time node pi.js
+/usr/bin/time -v node pi.js
