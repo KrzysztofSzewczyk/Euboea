@@ -17,7 +17,7 @@ function pi() {
         while(b > 0) {
             g = 2 * b - 1;
             if(c != NM) {
-                if(a[b] === undefined) {
+                if(!a[b]) {
                     a[b] = 0;
                 }
                 d = d * b + f * a[b];
@@ -29,7 +29,7 @@ function pi() {
             b = b - 1;
         }
         process.stdout.write((Math.floor(e + d / f)).toString().padStart(4, "0"));
-        if(cnt % 16 == 0) {
+        if(cnt % 16 === 0) {
             console.log("");
         }
         cnt = cnt + 1;
