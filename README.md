@@ -36,6 +36,7 @@ end
 Euboea highly relies on x86. Also currently it's tightly bound to POSIX.
 
 ## Philosophy
+
 Philosophy of Euboea includes the following rules:
 
 * **Fast** language compiled to machine code.
@@ -63,5 +64,9 @@ Currently, I will merge pull requests helping with:
  * Conforming to philosophy
  * Adding more libc calls
  * Increasing code coverage by pumping up more tests/examples
+
+## Issues
+
+[![Throughput Graph](https://graphs.waffle.io/kspalaiologos/Euboea/throughput.svg)](https://waffle.io/kspalaiologos/Euboea/metrics/throughput) 
 
 [//]: # (Listening to https://www.youtube.com/watch?v=Dqzrofdwi-g once is one free hug to you)
