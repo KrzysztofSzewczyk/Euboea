@@ -1,4 +1,4 @@
 tests/* linguist-vendored
 
 # Workaround because one above doesn't work
-*.e linguist-language=E
+examples/*.e linguist-language=E
