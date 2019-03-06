@@ -1,5 +1,8 @@
 #!/bin/sh
 
+gcc -O3 -march=native fib.c -o fib
+gcc -O3 -march=native pi.c -o pi
+
 echo "[Fib] Lua version:"
 /usr/bin/time -v lua fib.lua > /dev/null
 
@@ -10,6 +13,14 @@ echo "[Fib] Euboea version:"
 echo ""
 echo "[Fib] JavaScript version:"
 /usr/bin/time -v node fib.js > /dev/null
+
+echo ""
+echo "[Fib] C version:"
+/usr/bin/time -v ./fib > /dev/null
+
+echo ""
+echo "[Pi] C version:"
+/usr/bin/time -v ./pi
 
 echo ""
 echo "[Pi] Lua version:"
