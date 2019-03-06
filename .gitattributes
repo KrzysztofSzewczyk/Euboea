@@ -1,6 +1,4 @@
 tests/* linguist-vendored
-*.sh linguist-vendored
-*.lua linguist-vendored
 
 # Workaround because one above doesn't work
 *.e linguist-language=E
