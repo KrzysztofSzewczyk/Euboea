@@ -103,8 +103,7 @@ void dasm_put(Dst_DECL, int start, ...) {
     dasm_State * D = Dst_REF;
     dasm_ActList p = D->actionlist + start;
     dasm_Section * sec = D->section;
-    int pos = sec->pos, ofs = sec->ofs, mrm = 4;
-    int * b;
+    int pos = sec->pos, ofs = sec->ofs, mrm = 4, * b;
     if (pos >= sec->epos) {
         DASM_M_GROW(Dst, int, sec->buf, sec->bsize,
                     sec->bsize + 2*DASM_MAXSECPOS*sizeof(int));
@@ -187,8 +186,7 @@ stop:
 /* Pass 2: Link sections, shrink branches/aligns, fix label offsets. */
 int dasm_link(Dst_DECL, size_t * szp) {
     dasm_State * D = Dst_REF;
-    int secnum;
-    int ofs = 0;
+    int secnum, ofs = 0;
     #ifdef DASM_CHECKS
     *szp = 0;
     if (D->status != DASM_S_OK) return D->status;
@@ -210,9 +208,7 @@ int dasm_link(Dst_DECL, size_t * szp) {
     /* Combine all code sections. No support for data sections (yet). */
     for (secnum = 0; secnum < D->maxsection; secnum++) {
         dasm_Section * sec = D->sections + secnum;
-        int * b = sec->rbuf;
-        int pos = DASM_SEC2POS(secnum);
-        int lastpos = sec->pos;
+        int * b = sec->rbuf, pos = DASM_SEC2POS(secnum), lastpos = sec->pos;
         while (pos != lastpos) {
             dasm_ActList p = D->actionlist + b[pos++];
             while (1) {
@@ -276,8 +272,7 @@ int dasm_link(Dst_DECL, size_t * szp) {
 /* Pass 3: Encode sections. */
 int dasm_encode(Dst_DECL, void * buffer) {
     dasm_State * D = Dst_REF;
-    unsigned char * base = (unsigned char *)buffer;
-    unsigned char * cp = base;
+    unsigned char * base = (unsigned char *)buffer, * cp = base;
     int secnum;
     /* Encode all code sections. No support for data sections (yet). */
     for (secnum = 0; secnum < D->maxsection; secnum++) {
