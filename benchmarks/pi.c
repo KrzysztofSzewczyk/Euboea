@@ -4,13 +4,13 @@
 void pi(void) {
   const int N = 14*5000;
   const int NM = N - 14;
-  int * a = malloc(sizeof(int) * N);
-  int d = 0, e = 0, g = 0, h = 0, f = 10000, cnt = 1, c = NM, b;
+  int * a = malloc(sizeof(int) * N), d = 0, g = 0, f = 10000, cnt = 1, c = NM, b;
   if(!a) {
     fputs("Out of memory.", stderr);
     return;
   }
   for(; c; c -= 14) {
+    int e;
     d = d % f;
     e = d;
     for(b = c - 1; b > 0; b--) {
