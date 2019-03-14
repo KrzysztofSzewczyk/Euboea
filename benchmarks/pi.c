@@ -28,6 +28,7 @@ void pi(void) {
       putchar('\n');
     cnt++;
   }
+  free(a);
 }
 
 int main(void) {
