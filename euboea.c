@@ -523,7 +523,7 @@ int32_t isassign(void) {
     return 0;
 }
 
-int32_t assignment(voidvoid) {
+int32_t assignment(void) {
     var_t * v = getvar(tok_t.tok_t[tok_t.pos].val);
     int32_t inc = 0, dec = 0, declare = 0;
     if (v == NULL) {
