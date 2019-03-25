@@ -42,7 +42,7 @@ void put_str(int32_t * n) {
 }
 
 void put_ln(void) {
-    printf("\n");
+    putchar('\n');
 }
 
 int xor128(void) {
