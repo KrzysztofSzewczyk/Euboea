@@ -65,8 +65,4 @@ Currently, I will merge pull requests helping with:
  * Adding more libc calls
  * Increasing code coverage by pumping up more tests/examples
 
-## Issues
-
-[![Throughput Graph](https://graphs.waffle.io/kspalaiologos/Euboea/throughput.svg)](https://waffle.io/kspalaiologos/Euboea/metrics/throughput) 
-
 [//]: # (Listening to https://www.youtube.com/watch?v=Dqzrofdwi-g once is one free hug to you)
