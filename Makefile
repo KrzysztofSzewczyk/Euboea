@@ -1,7 +1,7 @@
 
 # Euboea
 #
-# Copyright (C) Kamila Palaiologos Szewczyk, 2019.
+# Copyright (C) Kamila Szewczyk, 2019.
 # License: MIT
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
